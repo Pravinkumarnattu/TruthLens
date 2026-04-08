@@ -1,10 +1,19 @@
 import { useApp } from "../../context/AppContext";
+import { useEffect } from "react";
 import ResultCard from "../results/ResultCard";
 import HighlightCard from "../results/HighlightCard";
 import ChatCard from "../results/ChatCard";
+import { useConfetti } from "../../hooks/useConfetti";
 
 export default function AnalyzeTab() {
   const { input, setInput, loading, result, error, sourceInfo, analyze } = useApp();
+  const { fire } = useConfetti();
+
+  useEffect(() => {
+    if (result?.verdict) {
+      fire(result.verdict);
+    }
+  }, [result]);
 
   return (
     <>
