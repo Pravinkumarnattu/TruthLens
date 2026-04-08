@@ -1,5 +1,6 @@
 import { useApp } from "../context/AppContext";
 import { verdictConfig } from "../data/sources";
+import ScoreChart from "./sidebar/ScoreChart";
 
 const TABS = [
   { id: "analyze",   label: "🔍 Analyze" },
@@ -9,7 +10,7 @@ const TABS = [
 ];
 
 export default function Sidebar() {
-  const { history, clearHistory, setInput, setActiveTab, activeTab, sidebarOpen, setSidebarOpen, history: h } = useApp();
+  const { history, clearHistory, setInput, setActiveTab, activeTab, setSidebarOpen } = useApp();
 
   const total = history.length;
   const credible = history.filter(h => h.verdict === "Credible" || h.verdict === "Likely Credible").length;
@@ -21,7 +22,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+    <aside className={`sidebar ${useApp().sidebarOpen ? "open" : ""}`}>
 
       {/* Tabs */}
       <div className="sidebar-card sidebar-tabs">
@@ -54,6 +55,9 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
+
+      {/* Score Chart */}
+      <ScoreChart />
 
       {/* History */}
       <div className="sidebar-card">
