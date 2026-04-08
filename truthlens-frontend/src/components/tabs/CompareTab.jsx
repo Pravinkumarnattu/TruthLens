@@ -123,7 +123,7 @@ export default function CompareTab() {
     setResult(null);
     try {
       const payload = isURL(text) ? { url: text } : { text };
-      const { data } = await axios.post("http://localhost:5000/analyze", payload);
+      const { data } = await axios.post(import.meta.env.VITE_BACKEND_URL + "/analyze", payload);
       setResult(data);
     } catch (err) {
       setError(err.response?.data?.error || "Analysis failed.");

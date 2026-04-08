@@ -11,7 +11,7 @@ export default function URLPreview({ url }) {
     const timer = setTimeout(async () => {
       setLoading(true);
       try {
-        const { data } = await axios.post("http://localhost:5000/preview", { url });
+        const { data } = await axios.post(import.meta.env.VITE_BACKEND_URL + "/preview", { url });
         setPreview(data);
       } catch {
         setPreview(null);
