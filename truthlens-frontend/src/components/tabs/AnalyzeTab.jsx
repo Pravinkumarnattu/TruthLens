@@ -3,16 +3,17 @@ import { useEffect } from "react";
 import ResultCard from "../results/ResultCard";
 import HighlightCard from "../results/HighlightCard";
 import ChatCard from "../results/ChatCard";
+import URLPreview from "../URLPreview";
 import { useConfetti } from "../../hooks/useConfetti";
 
 export default function AnalyzeTab() {
   const { input, setInput, loading, result, error, sourceInfo, analyze } = useApp();
   const { fire } = useConfetti();
 
+  const isURL = (str) => str.startsWith("http://") || str.startsWith("https://");
+
   useEffect(() => {
-    if (result?.verdict) {
-      fire(result.verdict);
-    }
+    if (result?.verdict) fire(result.verdict);
   }, [result]);
 
   return (
@@ -26,7 +27,15 @@ export default function AnalyzeTab() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <button className="btn" onClick={() => analyze()} disabled={loading || !input.trim()}>
+
+        {/* URL Preview */}
+        {isURL(input) && <URLPreview url={input} />}
+
+        <button
+          className="btn"
+          onClick={() => analyze()}
+          disabled={loading || !input.trim()}
+        >
           {loading ? "Analyzing..." : "Analyze"}
         </button>
         {error && <p className="error">{error}</p>}

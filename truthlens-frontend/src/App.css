@@ -1159,6 +1159,159 @@ body.dark {
   flex-shrink: 0;
 }
 
+/* URL Preview */
+.url-preview {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 0.5px solid #e0e0e0;
+  background: #f9f9f7;
+  margin-bottom: 12px;
+  align-items: flex-start;
+  animation: fadeIn 0.3s ease;
+}
+.dark .url-preview {
+  background: #222;
+  border-color: #333;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.url-preview-loading {
+  opacity: 0.6;
+}
+
+.url-preview-left {
+  flex-shrink: 0;
+}
+
+.url-preview-thumb {
+  width: 72px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 0.5px solid #e0e0e0;
+}
+
+.url-preview-favicon-wrap {
+  width: 36px;
+  height: 36px;
+  background: white;
+  border-radius: 8px;
+  border: 0.5px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dark .url-preview-favicon-wrap {
+  background: #333;
+  border-color: #444;
+}
+
+.url-preview-favicon {
+  width: 20px;
+  height: 20px;
+}
+.url-preview-favicon-placeholder {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #e0e0e0;
+}
+
+.url-preview-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.url-preview-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dark .url-preview-title {
+  color: #eee;
+}
+
+.url-preview-desc {
+  font-size: 12px;
+  color: #888;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.url-preview-domain {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 2px;
+}
+.url-preview-domain-favicon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Skeleton loading */
+.url-skeleton {
+  background: #e0e0e0;
+  border-radius: 4px;
+  animation: shimmer 1.2s infinite;
+}
+.dark .url-skeleton {
+  background: #333;
+}
+.url-skeleton-title {
+  height: 14px;
+  width: 80%;
+  margin-bottom: 6px;
+}
+.url-skeleton-desc {
+  height: 12px;
+  width: 100%;
+  margin-bottom: 4px;
+}
+.url-skeleton-domain {
+  height: 11px;
+  width: 40%;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.url-preview-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .hamburger {

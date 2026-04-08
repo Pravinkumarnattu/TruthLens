@@ -238,6 +238,40 @@ app.post("/chat", async (req, res) => {
   }
 });
 
+// ── POST /preview ───────────────────────────────────────────────
+app.post("/preview", async (req, res) => {
+  try {
+    const { url } = req.body;
+    if (!url) return res.status(400).json({ error: "URL required." });
+
+    const { data } = await axios.get(url, {
+      headers: { "User-Agent": "Mozilla/5.0" },
+      timeout: 6000,
+    });
+
+    const $ = cheerio.load(data);
+
+    const title =
+      $('meta[property="og:title"]').attr("content") ||
+      $("title").text() ||
+      "No title found";
+
+    const description =
+      $('meta[property="og:description"]').attr("content") ||
+      $('meta[name="description"]').attr("content") ||
+      "No description available";
+
+    const image = $('meta[property="og:image"]').attr("content") || null;
+
+    const domain = new URL(url).hostname.replace("www.", "");
+    const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+
+    return res.json({ title, description, domain, favicon, image });
+  } catch (err) {
+    return res.status(422).json({ error: "Could not fetch URL preview." });
+  }
+});
+
 // ── Health check ────────────────────────────────────────────────
 app.get("/", (req, res) => res.json({ status: "TruthLens API running ✓" }));
 
