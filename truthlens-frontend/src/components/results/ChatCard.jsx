@@ -57,7 +57,7 @@ Do not repeat the full analysis unless asked.
         content: m.text,
       }));
 
-      const { data } = await axios.post("http://localhost:5000/chat", {
+      const { data } = await axios.post(import.meta.env.VITE_BACKEND_URL + "/chat", {
         system: buildSystemPrompt(),
         messages: chatHistory,
       });

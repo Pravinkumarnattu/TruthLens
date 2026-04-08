@@ -45,7 +45,7 @@ export function AppProvider({ children }) {
 
     try {
       const payload = isURL(target) ? { url: target } : { text: target };
-      const { data } = await axios.post("http://localhost:5000/analyze", payload);
+      const { data } = await axios.post(import.meta.env.VITE_BACKEND_URL + "/analyze", payload);
       setResult(data);
 
       // Store raw text for highlighting (only if not a URL)
@@ -71,7 +71,7 @@ export function AppProvider({ children }) {
     if (!rawText || !result?.red_flags?.length) return;
     setHighlightLoading(true);
     try {
-      const { data } = await axios.post("http://localhost:5000/highlight", {
+      const { data } = await axios.post(import.meta.env.VITE_BACKEND_URL + "/highlight", {
         text: rawText,
         redFlags: result.red_flags,
       });
